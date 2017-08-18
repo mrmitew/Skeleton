@@ -1,0 +1,79 @@
+package com.github.mrmitew.skeleton.data.http.di;
+
+import com.github.mrmitew.skeleton.BuildConfig;
+import com.github.mrmitew.skeleton.data.http.BackendRestApi;
+import com.github.mrmitew.skeleton.data.http.OkHttpCache;
+import com.github.mrmitew.skeleton.data.http.OkHttpCacheInterceptor;
+import com.github.mrmitew.skeleton.data.http.OkHttpOfflineCacheInterceptor;
+import com.google.gson.Gson;
+
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+import dagger.Module;
+import dagger.Provides;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+@Module
+public class BackendApiModule {
+    private static final String API_BASE_URL = "https://api.github.com/";
+
+    @Provides
+    @Singleton
+    BackendRestApi provideBackendRestApi(Retrofit retrofit) {
+        return retrofit.create(BackendRestApi.class);
+    }
+
+    @Provides
+    @Singleton
+    Retrofit provideRetrofit(final @Named("rest") OkHttpClient okHttpClient,
+                             final GsonConverterFactory gsonConverterFactory,
+                             final RxJava2CallAdapterFactory rxJava2CallAdapterFactory) {
+        return new Retrofit.Builder()
+                .baseUrl(API_BASE_URL)
+                .client(okHttpClient)
+                .addConverterFactory(gsonConverterFactory)
+                .addCallAdapterFactory(rxJava2CallAdapterFactory)
+                .validateEagerly(BuildConfig.DEBUG)  // Fail early: check Retrofit configuration at creation time in Debug build.
+                .build();
+    }
+
+    @Provides
+    @Singleton
+    RxJava2CallAdapterFactory providesRxJava2CallAdapterFactory() {
+        return RxJava2CallAdapterFactory.create();
+    }
+
+    @Provides
+    @Singleton
+    GsonConverterFactory providesGsonConverterFactory(Gson gson) {
+        return GsonConverterFactory.create(gson);
+    }
+
+    @Provides
+    @Singleton
+    @Named("rest")
+    OkHttpClient provideOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor,
+                                     OkHttpOfflineCacheInterceptor offlineCacheInterceptor,
+                                     OkHttpCacheInterceptor cacheInterceptor,
+                                     OkHttpCache cache) {
+        return new OkHttpClient.Builder()
+                .addInterceptor(httpLoggingInterceptor)
+                .addInterceptor(offlineCacheInterceptor)
+                .addNetworkInterceptor(cacheInterceptor)
+                .cache(cache.create())
+                .build();
+    }
+
+    @Provides
+    @Singleton
+    HttpLoggingInterceptor provideHttpLoggingInterceptor() {
+        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        return httpLoggingInterceptor;
+    }
+}

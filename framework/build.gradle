@@ -120,6 +120,17 @@ dependencies {
 
     // Auth
 
+    // Storage
+    implementation "com.scottyab:secure-preferences-lib:$versions.securePrefs"
+    implementation "com.pixplicity.easyprefs:library:$versions.easyPrefs"
+
+    // HTTP
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+    implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$versions.okHttp"
+
     // Others
 //    implementation "com.android.support:multidex:$versions.multiDex"
     implementation "com.google.dagger:dagger:$versions.dagger"
