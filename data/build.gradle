@@ -36,25 +36,36 @@ dependencies {
     implementation project(':domain')
 
     // Support lib
-    implementation "com.android.support:appcompat-v7:$versions.supportLibs"
-
-    // UI libs
-    implementation "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
 
     // Reactive
+    implementation "io.reactivex.rxjava2:rxjava:$versions.rxJava2"
+    implementation "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
+    implementation "com.jakewharton.rxrelay2:rxrelay:$versions.rxRelay2"
 
     // Auth
 
     // Storage
+    implementation "com.scottyab:secure-preferences-lib:$versions.securePrefs"
+    implementation "com.pixplicity.easyprefs:library:$versions.easyPrefs"
 
     // HTTP
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+    implementation "com.squareup.okhttp3:okhttp:$versions.okHttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$versions.okHttp"
 
     // Others
+    implementation "com.google.dagger:dagger:$versions.dagger"
+    annotationProcessor "com.google.dagger:dagger-compiler:$versions.dagger"
+    annotationProcessor "com.google.auto.value:auto-value:$versions.autoValue"
+    provided "com.jakewharton.auto.value:auto-value-annotations:$versions.autoValueAnnotations"
 
     // Debugging & Inspecting
 
     // Testing
     testImplementation "junit:junit:$versions.junit"
+    testImplementation "org.mockito:mockito-core:$versions.mockito"
     androidTestImplementation "com.android.support.test:runner:$versions.supportTestRunner"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$versions.espresso"
 }
