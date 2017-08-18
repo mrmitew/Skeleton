@@ -20,7 +20,7 @@ public class AndroidApplication extends /*MultiDex*/Application implements HasAc
     private static final String TAG = AndroidApplication.class.getSimpleName();
 
     @Inject
-    private Map<Class<? extends Activity>, Provider<ActivityComponentBuilder>> mActivityComponentBuilders;
+    Map<Class<? extends Activity>, Provider<ActivityComponentBuilder>> mActivityComponentBuilders;
 
     private ApplicationComponent mApplicationComponent;
 
