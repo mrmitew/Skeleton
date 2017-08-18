@@ -1,11 +1,12 @@
 package com.github.mrmitew.skeleton.data.http.di;
 
 import com.github.mrmitew.skeleton.BuildConfig;
-import com.github.mrmitew.skeleton.data.http.BackendRestApi;
+import com.github.mrmitew.skeleton.data.gson.AutoValueGsonConverter;
 import com.github.mrmitew.skeleton.data.http.OkHttpCache;
 import com.github.mrmitew.skeleton.data.http.OkHttpCacheInterceptor;
 import com.github.mrmitew.skeleton.data.http.OkHttpOfflineCacheInterceptor;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -19,22 +20,16 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
-public class BackendApiModule {
-    private static final String API_BASE_URL = "https://api.github.com/";
+public abstract class RetrofitApiModule {
+    protected abstract String getApiBaseUrl();
 
     @Provides
     @Singleton
-    BackendRestApi provideBackendRestApi(Retrofit retrofit) {
-        return retrofit.create(BackendRestApi.class);
-    }
-
-    @Provides
-    @Singleton
-    Retrofit provideRetrofit(final @Named("rest") OkHttpClient okHttpClient,
+    Retrofit provideRetrofit(final OkHttpClient okHttpClient,
                              final GsonConverterFactory gsonConverterFactory,
                              final RxJava2CallAdapterFactory rxJava2CallAdapterFactory) {
         return new Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
+                .baseUrl(getApiBaseUrl())
                 .client(okHttpClient)
                 .addConverterFactory(gsonConverterFactory)
                 .addCallAdapterFactory(rxJava2CallAdapterFactory)
@@ -50,13 +45,21 @@ public class BackendApiModule {
 
     @Provides
     @Singleton
-    GsonConverterFactory providesGsonConverterFactory(Gson gson) {
+    GsonConverterFactory providesGsonConverterFactory(@Named("retrofit") Gson gson) {
         return GsonConverterFactory.create(gson);
     }
 
     @Provides
     @Singleton
-    @Named("rest")
+    @Named("retrofit")
+    Gson providesGson() {
+        return new GsonBuilder()
+                .registerTypeAdapterFactory(AutoValueGsonConverter.create())
+                .create();
+    }
+
+    @Provides
+    @Singleton
     OkHttpClient provideOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor,
                                      OkHttpOfflineCacheInterceptor offlineCacheInterceptor,
                                      OkHttpCacheInterceptor cacheInterceptor,

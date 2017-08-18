@@ -27,6 +27,20 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "GIT_SHA", "\"${androidGitVersion.name()}\""
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        //
+                        // AutoValue
+                        //
+
+                        //  If specified, maps/collections will default to their empty types
+                        // (e.g. List -> Collections.emptyList())
+                        'autovaluegson.defaultCollectionsToEmpty': 'true'
+                ]
+            }
+        }
     }
 
     signingConfigs {
