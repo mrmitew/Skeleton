@@ -12,6 +12,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class WelcomeActivity extends BaseActivity {
+    private static final String TAG = "WelcomeActivity";
+
     @BindView(R.id.tv_welcome_message)
     TextView mTvWelcomeMessage;
 
