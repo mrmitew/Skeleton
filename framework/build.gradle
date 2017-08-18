@@ -1,0 +1,106 @@
+plugins {
+    id 'com.gladed.androidgitversion' version '0.3.4'
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://clojars.org/repo/" }
+}
+
+apply plugin: 'com.android.application'
+
+androidGitVersion {
+    format = '%commit%'
+}
+
+android {
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
+
+    defaultConfig {
+        applicationId "com.github.mrmitew.skeleton"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        multiDexEnabled false
+        versionCode versions.versionCode
+        versionName versions.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "GIT_SHA", "\"${androidGitVersion.name()}\""
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("../.signing/debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+        release {
+            // FIXME
+            storeFile file("../.signing/debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+    }
+
+    buildTypes {
+        debug {
+            versionNameSuffix "-" + androidGitVersion.name()
+            applicationIdSuffix ".debug"
+            debuggable true
+            jniDebuggable true
+            minifyEnabled false
+            zipAlignEnabled false
+            signingConfig signingConfigs.debug
+        }
+
+        release {
+            debuggable false
+            jniDebuggable false
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Module dependencies
+    implementation project(':data')
+    implementation project(':adapter')
+    implementation project(':domain')
+
+    // Support lib
+    implementation "com.android.support:appcompat-v7:$versions.supportLibs"
+
+    // UI libs
+    implementation "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
+
+    // Reactive
+
+    // Auth
+
+    // Storage
+
+    // HTTP
+
+    // Others
+
+    // Debugging & Inspecting
+
+    // Testing
+    testImplementation "junit:junit:$versions.junit"
+    androidTestImplementation "com.android.support.test:runner:$versions.supportTestRunner"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$versions.espresso"
+}

@@ -1,0 +1,26 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Module dependencies
+    compile project(':domain')
+
+    // Reactive
+
+    // Auth
+
+    // Storage
+
+    // HTTP
+
+    // Others
+
+    // Debugging & Inspecting
+
+    // Testing
+    testCompile "junit:junit:$versions.junit"
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
