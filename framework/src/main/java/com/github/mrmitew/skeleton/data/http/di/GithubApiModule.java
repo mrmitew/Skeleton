@@ -1,6 +1,12 @@
 package com.github.mrmitew.skeleton.data.http.di;
 
+import com.github.mrmitew.skeleton.data.repository.github.GithubRestApi;
+
+import javax.inject.Singleton;
+
 import dagger.Module;
+import dagger.Provides;
+import retrofit2.Retrofit;
 
 @Module
 public class GithubApiModule extends RetrofitApiModule {
@@ -9,5 +15,11 @@ public class GithubApiModule extends RetrofitApiModule {
     @Override
     protected String getApiBaseUrl() {
         return API_BASE_URL;
+    }
+
+    @Provides
+    @Singleton
+    GithubRestApi provideBackendRestApi(Retrofit retrofit) {
+        return retrofit.create(GithubRestApi.class);
     }
 }
