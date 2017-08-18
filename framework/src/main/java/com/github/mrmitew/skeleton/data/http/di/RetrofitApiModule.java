@@ -2,7 +2,6 @@ package com.github.mrmitew.skeleton.data.http.di;
 
 import com.github.mrmitew.skeleton.BuildConfig;
 import com.github.mrmitew.skeleton.data.gson.AutoValueGsonConverter;
-import com.github.mrmitew.skeleton.data.http.BackendRestApi;
 import com.github.mrmitew.skeleton.data.http.OkHttpCache;
 import com.github.mrmitew.skeleton.data.http.OkHttpCacheInterceptor;
 import com.github.mrmitew.skeleton.data.http.OkHttpOfflineCacheInterceptor;
@@ -23,12 +22,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public abstract class RetrofitApiModule {
     protected abstract String getApiBaseUrl();
-
-    @Provides
-    @Singleton
-    BackendRestApi provideBackendRestApi(Retrofit retrofit) {
-        return retrofit.create(BackendRestApi.class);
-    }
 
     @Provides
     @Singleton
