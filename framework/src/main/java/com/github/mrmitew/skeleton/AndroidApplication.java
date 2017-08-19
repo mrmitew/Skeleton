@@ -16,6 +16,8 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import dagger.internal.DaggerCollections;
+
 public class AndroidApplication extends /*MultiDex*/Application implements HasActivitySubcomponentBuilders {
     private static final String TAG = AndroidApplication.class.getSimpleName();
 
@@ -55,6 +57,7 @@ public class AndroidApplication extends /*MultiDex*/Application implements HasAc
                         .builder()
                         .applicationModule(new ApplicationModule(this))
                         .build();
+
         mApplicationComponent.inject(this);
     }
 

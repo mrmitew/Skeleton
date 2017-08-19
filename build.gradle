@@ -1,14 +1,20 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+
+
 buildscript {
-    
+    ext.kotlin_version = '1.1.4'
+
+    ext.kotlin = [version : '1.1.4']
+
     repositories {
         google()
         jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.0-beta2'
-        
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin.version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -33,6 +39,9 @@ ext.versions = [
         targetSdk           : 26,
         compileSdk          : 26,
         buildTools          : '26.0.0',
+
+        // Kotlin
+        kotlin              : "$kotlin.version",
 
         // UI libs
         butterknife         : '8.5.1',
@@ -66,7 +75,7 @@ ext.versions = [
         playServices        : '11.0.4',
         retrolambda         : '3.7.0',
         javaApt             : '0.5',
-        dagger              : '2.10-rc4',
+        dagger              : '2.11',
         gson                : '2.8.1',
         autoValue           : '1.4.1',
         autoValueAnnotations: '1.4',
