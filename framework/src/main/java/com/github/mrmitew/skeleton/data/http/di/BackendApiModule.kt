@@ -4,11 +4,9 @@ import com.github.mrmitew.skeleton.BuildConfig
 import com.github.mrmitew.skeleton.data.http.BackendRestApi
 import com.github.mrmitew.skeleton.data.http.OkHttpCache
 import com.github.mrmitew.skeleton.data.http.OkHttpOfflineCacheInterceptor
-import com.github.mrmitew.skeleton.domain.executor.JobExecutor
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
-import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
