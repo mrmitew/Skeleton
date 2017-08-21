@@ -1,8 +1,6 @@
 package com.github.mrmitew.skeleton.base.view
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.widget.Toast
 import icepick.Icepick
 import io.reactivex.disposables.CompositeDisposable
 

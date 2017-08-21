@@ -2,16 +2,12 @@ package com.github.mrmitew.skeleton
 
 import android.app.Activity
 import android.app.Application
-import android.app.Fragment
 import android.content.Context
 import android.support.v4.app.FragmentActivity
-import com.github.mrmitew.skeleton.di.activity.ActivityComponent
 import com.github.mrmitew.skeleton.di.activity.ActivityComponentBuilder
-import com.github.mrmitew.skeleton.di.activity.ActivityModule
 import com.github.mrmitew.skeleton.di.activity.HasActivitySubcomponentBuilders
 import com.github.mrmitew.skeleton.di.application.ApplicationComponent
 import com.github.mrmitew.skeleton.di.application.DaggerApplicationComponent
-import dagger.internal.DaggerCollections
 import javax.inject.Inject
 import javax.inject.Provider
 

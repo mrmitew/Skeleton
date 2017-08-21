@@ -1,9 +1,15 @@
 package com.github.mrmitew.skeleton.utils
 
+import android.app.Fragment
+import android.support.v4.app.FragmentActivity
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 
 /** small extension to the AppCompatActivity to create toasts **/
-fun AppCompatActivity.showToast(message: String){
+fun FragmentActivity.showToast(message: String){
     Toast.makeText(applicationContext,message, Toast.LENGTH_SHORT).show()
+}
+
+fun Fragment.showToast(message: String){
+    Toast.makeText(activity, message,Toast.LENGTH_SHORT).show()
 }
