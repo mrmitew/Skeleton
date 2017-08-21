@@ -4,9 +4,12 @@ import com.github.mrmitew.skeleton.di.activity.ActivityComponent;
 import com.github.mrmitew.skeleton.di.activity.ActivityComponentBuilder;
 import com.github.mrmitew.skeleton.di.activity.ActivityModule;
 import com.github.mrmitew.skeleton.di.activity.ActivityScope;
+import com.github.mrmitew.skeleton.welcome.interactor.GetRepoListUseCaseDecorator;
 import com.github.mrmitew.skeleton.welcome.view.WelcomeActivity;
+import com.github.mrmitew.skeleton.welcome.view.WelcomePresenter;
 
 import dagger.Module;
+import dagger.Provides;
 import dagger.Subcomponent;
 
 @ActivityScope
@@ -25,6 +28,12 @@ public interface WelcomeActivityComponent extends ActivityComponent<WelcomeActiv
     class WelcomeActivityModule extends ActivityModule<WelcomeActivity> {
         public WelcomeActivityModule(WelcomeActivity activity) {
             super(activity);
+        }
+
+        @Provides
+        @ActivityScope
+        public WelcomePresenter providesWelcomePresenter(GetRepoListUseCaseDecorator getRepoListUseCaseDecorator) {
+            return new WelcomePresenter(provideActivity(), getRepoListUseCaseDecorator);
         }
     }
 }

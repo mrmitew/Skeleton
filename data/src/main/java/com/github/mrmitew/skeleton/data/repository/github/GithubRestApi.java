@@ -1,6 +1,6 @@
 package com.github.mrmitew.skeleton.data.repository.github;
 
-import com.github.mrmitew.skeleton.data.repository.github.entity.Repo;
+import com.github.mrmitew.skeleton.data.repository.github.entity.GithubRepo;
 
 import java.util.List;
 
@@ -10,5 +10,5 @@ import retrofit2.http.Path;
 
 public interface GithubRestApi {
     @GET("users/{user}/repos")
-    Single<List<Repo>> listRepos(@Path("user") String user);
+    Single<List<GithubRepo>> listRepos(@Path("user") String user);
 }

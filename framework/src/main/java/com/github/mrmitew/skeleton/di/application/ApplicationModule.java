@@ -50,4 +50,5 @@ public class ApplicationModule {
     PostExecutionThread providePostExecutionThread(UiThread uiThread) {
         return uiThread;
     }
+
 }

@@ -6,7 +6,7 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
 @AutoValue
-public abstract class Repo {
+public abstract class GithubRepo {
     public abstract int getId();
 
     public abstract String getName();
@@ -16,12 +16,12 @@ public abstract class Repo {
 
     public abstract String getUrl();
 
-    public static TypeAdapter<Repo> typeAdapter(Gson gson) {
-        return new AutoValue_Repo.GsonTypeAdapter(gson);
+    public static TypeAdapter<GithubRepo> typeAdapter(Gson gson) {
+        return new AutoValue_GithubRepo.GsonTypeAdapter(gson);
     }
 
     public static Builder builder() {
-        return new AutoValue_Repo.Builder();
+        return new AutoValue_GithubRepo.Builder();
     }
 
     @AutoValue.Builder
@@ -34,6 +34,6 @@ public abstract class Repo {
 
         public abstract Builder setUrl(final String newUrl);
 
-        public abstract Repo build();
+        public abstract GithubRepo build();
     }
 }
