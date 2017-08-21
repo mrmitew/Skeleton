@@ -98,9 +98,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    //Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$versions.kotlin"
-
     // Module dependencies
     implementation project(':data')
     implementation project(':adapter')
@@ -145,7 +142,7 @@ dependencies {
     implementation "com.google.dagger:dagger:$versions.dagger"
     kapt "com.google.dagger:dagger-compiler:$versions.dagger"
     implementation "frankiesardo:icepick:$versions.icePick"
-    annotationProcessor "frankiesardo:icepick-processor:$versions.icePick"
+    kapt "frankiesardo:icepick-processor:$versions.icePick"
     implementation "com.google.code.gson:gson:$versions.gson"
 
     // Debugging & Inspecting
