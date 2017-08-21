@@ -1,11 +1,9 @@
-package com.github.mrmitew.skeleton.welcome.interactor;
+package com.github.mrmitew.skeleton.adapter.base.view.welcome.interactor;
 
-import android.support.annotation.NonNull;
-
+import com.github.mrmitew.skeleton.adapter.base.view.welcome.RepoListViewState;
 import com.github.mrmitew.skeleton.domain.common.UseCaseDecorator;
 import com.github.mrmitew.skeleton.domain.repository.entity.Repo;
 import com.github.mrmitew.skeleton.domain.welcome.search.interactor.GetRepoListUseCase;
-import com.github.mrmitew.skeleton.welcome.view.RepoListViewState;
 
 import java.util.List;
 
@@ -27,7 +25,6 @@ public class GetRepoListUseCaseDecorator extends UseCaseDecorator<String, RepoLi
                 .buildUseCase(searchString, getTransformation(searchString));
     }
 
-    @NonNull
     private ObservableTransformer<List<Repo>, RepoListViewState> getTransformation(final String searchString) {
         return upstream -> {
             if (searchString.isEmpty()) {

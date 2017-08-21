@@ -1,4 +1,4 @@
-package com.github.mrmitew.skeleton.welcome.view;
+package com.github.mrmitew.skeleton.adapter.base.view.welcome;
 
 import io.reactivex.Observable;
 

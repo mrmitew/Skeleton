@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableTransformer;
+import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;
 
 public class GetRepoListUseCase extends UseCase<String, List<Repo>> {
@@ -32,15 +33,23 @@ public class GetRepoListUseCase extends UseCase<String, List<Repo>> {
                                           ObservableTransformer<List<Repo>, O> transformer) {
         return getObservable(searchString)
                 .compose(transformer)
-                .subscribeOn(Schedulers.from(mThreadExecutor))
-                .observeOn(mPostExecutionThread.getScheduler());
+                .subscribeOn(getThreadExecutorScheduler())
+                .observeOn(getPostExecutionThreadScheduler());
+    }
+
+    public Scheduler getPostExecutionThreadScheduler() {
+        return mPostExecutionThread.getScheduler();
+    }
+
+    public Scheduler getThreadExecutorScheduler() {
+        return Schedulers.from(mThreadExecutor);
     }
 
     @Override
     public Observable<List<Repo>> buildUseCase(String searchString) {
         return getObservable(searchString)
-                .subscribeOn(Schedulers.from(mThreadExecutor))
-                .observeOn(mPostExecutionThread.getScheduler());
+                .subscribeOn(getThreadExecutorScheduler())
+                .observeOn(getPostExecutionThreadScheduler());
     }
 
     private Observable<List<Repo>> getObservable(final String searchString) {

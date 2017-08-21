@@ -1,4 +1,4 @@
-package com.github.mrmitew.skeleton.adapter.base.view;
+package com.github.mrmitew.skeleton.adapter.base.view.base;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;

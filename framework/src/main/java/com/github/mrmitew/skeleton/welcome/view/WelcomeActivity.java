@@ -6,6 +6,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.github.mrmitew.skeleton.R;
+import com.github.mrmitew.skeleton.adapter.base.view.welcome.RepoListViewState;
+import com.github.mrmitew.skeleton.adapter.base.view.welcome.RepoSearchView;
+import com.github.mrmitew.skeleton.adapter.base.view.welcome.WelcomePresenter;
 import com.github.mrmitew.skeleton.base.view.BaseActivity;
 import com.github.mrmitew.skeleton.di.activity.HasActivitySubcomponentBuilders;
 import com.github.mrmitew.skeleton.welcome.di.WelcomeActivityComponent;
@@ -30,7 +33,7 @@ public class WelcomeActivity extends BaseActivity implements RepoSearchView {
     EditText mEtUsername;
 
     @Inject
-    WelcomePresenter mBasePresenter;
+    WelcomePresenter mWelcomePresenter;
 
     RepoListViewState.RenderVisitor mRenderVisitor = new RepoListViewState.RenderVisitor() {
         @Override
@@ -69,8 +72,8 @@ public class WelcomeActivity extends BaseActivity implements RepoSearchView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         ButterKnife.bind(this);
-        mCompositeDisposable.add(mBasePresenter);
-        mBasePresenter.bindIntents();
+        mCompositeDisposable.add(mWelcomePresenter);
+        mWelcomePresenter.bindIntents();
     }
 
     @Override

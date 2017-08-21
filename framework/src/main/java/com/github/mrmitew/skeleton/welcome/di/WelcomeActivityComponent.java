@@ -1,12 +1,12 @@
 package com.github.mrmitew.skeleton.welcome.di;
 
+import com.github.mrmitew.skeleton.adapter.base.view.welcome.WelcomePresenter;
+import com.github.mrmitew.skeleton.adapter.base.view.welcome.interactor.GetRepoListUseCaseDecorator;
 import com.github.mrmitew.skeleton.di.activity.ActivityComponent;
 import com.github.mrmitew.skeleton.di.activity.ActivityComponentBuilder;
 import com.github.mrmitew.skeleton.di.activity.ActivityModule;
 import com.github.mrmitew.skeleton.di.activity.ActivityScope;
-import com.github.mrmitew.skeleton.welcome.interactor.GetRepoListUseCaseDecorator;
 import com.github.mrmitew.skeleton.welcome.view.WelcomeActivity;
-import com.github.mrmitew.skeleton.welcome.view.WelcomePresenter;
 
 import dagger.Module;
 import dagger.Provides;

@@ -1,8 +1,8 @@
-package com.github.mrmitew.skeleton.welcome.view;
+package com.github.mrmitew.skeleton.adapter.base.view.welcome;
 
-import com.github.mrmitew.skeleton.adapter.base.view.BasePresenter;
+import com.github.mrmitew.skeleton.adapter.base.view.base.BasePresenter;
+import com.github.mrmitew.skeleton.adapter.base.view.welcome.interactor.GetRepoListUseCaseDecorator;
 import com.github.mrmitew.skeleton.domain.executor.UseCaseExecutor;
-import com.github.mrmitew.skeleton.welcome.interactor.GetRepoListUseCaseDecorator;
 
 public class WelcomePresenter extends BasePresenter {
     private final RepoSearchView mRepoSearchView;
